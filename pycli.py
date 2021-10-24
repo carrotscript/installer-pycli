@@ -1,5 +1,3 @@
-import datetime
-import os
 import sys
 import ast
 def is_valid_python(code):
@@ -8,6 +6,25 @@ def is_valid_python(code):
    except SyntaxError:
        return False
    return True
+
+ask = ""
+test = 0
+run = 0
+def ifDone():
+    global test
+    global run
+    ask = input("... ")
+    if str(ask) == "":
+        pass
+        test = "true"
+    else:
+        test = ask
+    if test == "true":
+        pass
+    else:
+        run = run + test
+        ifDone()
+    
 
 
 class color:
@@ -31,13 +48,16 @@ print("")
 while True:
     try:
         run = input(">>> ")
+        if ":" in run:
+            run = run + input("... ")
+            ifDone()
+            run = run.replace("\t", "\n\t")
         exec(run)
+        
     except Exception:
         valid = str(is_valid_python(run))
         if valid == "True":
-            print(valid)
             pass
         else:
             print(color.BLUE + "This code is not valid." + color.END)
             pass
- 
